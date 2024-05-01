@@ -2,55 +2,62 @@
 
 import { useLastViewedPhoto } from "@/lib/hooks/use-last-viewed-photo";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 // import { useKeypress } from "react-use-keypress";
-import SharedModal from "./modal";
+import SharedModal from "./shared-modal";
 import { ImageProps } from "@/lib/types";
+import { useRef, useState } from "react";
 
-export default function Carousel({
+export default function Modal({
+  images,
   index,
-  currentPhoto,
 }: {
+  images: ImageProps[];
+  // onClose?: () => void;
   index: number;
-  currentPhoto: ImageProps;
 }) {
+  let overlayRef = useRef();
   const router = useRouter();
-  const [, setLastViewedPhoto] = useLastViewedPhoto();
 
-  function closeModal() {
-    setLastViewedPhoto(currentPhoto?.id);
+  const path = usePathname();
+
+  const [direction, setDirection] = useState(0);
+  const [curIndex, setCurIndex] = useState(index);
+
+  function handleClose() {
     router.back();
   }
 
   function changePhotoId(newVal: number) {
-    return newVal;
+    if (newVal > index) {
+      setDirection(1);
+    } else {
+      setDirection(-1);
+    }
+    setCurIndex(newVal);
+    router.push(`/gallery/bala-shans/${newVal}`);
   }
 
-  // useKeypress("Escape", () => {
-  //   closeModal();
+  // useKeypress("ArrowRight", () => {
+  //   if (index + 1 < images.length) {
+  //     changePhotoId(index + 1);
+  //   }
+  // });
+
+  // useKeypress("ArrowLeft", () => {
+  //   if (index > 0) {
+  //     changePhotoId(index - 1);
+  //   }
   // });
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
-      <button
-        className="absolute inset-0 z-30 cursor-default bg-black backdrop-blur-2xl"
-        onClick={closeModal}
-      >
-        <Image
-          src={currentPhoto.blurDataUrl!}
-          className="pointer-events-none h-full w-full"
-          alt="blurred background"
-          fill
-          priority={true}
-        />
-      </button>
-      <SharedModal
-        index={index}
-        changePhotoId={changePhotoId}
-        currentPhoto={currentPhoto}
-        closeModal={closeModal}
-        navigation={false}
-      />
-    </div>
+    <SharedModal
+      index={curIndex}
+      direction={direction}
+      images={images}
+      changePhotoId={changePhotoId}
+      closeModal={handleClose}
+      navigation={true}
+    />
   );
 }

@@ -9,7 +9,7 @@ export type ImageProps = {
 
 export type SharedModalProps = {
   index: number;
-  images?: ImageProps[];
+  images: ImageProps[];
   currentPhoto?: ImageProps;
   changePhotoId: (newVal: number) => void;
   closeModal: () => void;

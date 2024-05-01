@@ -3,8 +3,8 @@
 import getResults from "../cached-images";
 import cloudinary from "../cloudinary";
 import { ImageProps } from "../types";
-import imagemin from "imagemin"
-import imageminJpegTran from "imagemin-jpegtran"
+// import imagemin from "imagemin"
+// import imageminJpegTran from "imagemin-jpegtran"
 
 export async function getImages() {
   const results = await cloudinary.v2.search
