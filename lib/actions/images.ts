@@ -31,6 +31,8 @@ export async function getImages() {
     images[i].blurDataUrl = blurImages[i]
   }
 
+  console.log(images)
+
   return images;
 }
 

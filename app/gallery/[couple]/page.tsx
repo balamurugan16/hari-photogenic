@@ -1,4 +1,4 @@
-import { ImageGallery } from "@/components/image-gallery";
+import { ImageGallery } from "@/components/alternate-image-gallery";
 import { getImages } from "@/lib/actions/images";
 
 export default async function Home() {

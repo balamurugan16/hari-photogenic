@@ -1,7 +1,6 @@
 import {
   ArrowDownTrayIcon,
   ArrowTopRightOnSquareIcon,
-  ArrowUturnLeftIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   XMarkIcon,
@@ -11,7 +10,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { SharedModalProps } from "@/lib/types";
-import { range } from "@/lib/utils";
+import { getDimensions, isLandscape, range } from "@/lib/utils";
 import { variants } from "@/lib/animations";
 import downloadPhoto from "@/lib/download-photo";
 
@@ -45,6 +44,8 @@ export default function SharedModal({
 
   let currentImage = images ? images[index] : currentPhoto;
 
+  const dimensions = getDimensions(currentImage!);
+
   return (
     <MotionConfig
       transition={{
@@ -53,12 +54,12 @@ export default function SharedModal({
       }}
     >
       <div
-        className="relative z-50 flex aspect-[3/2] w-full max-w-7xl items-center wide:h-full xl:taller-than-854:h-auto"
+        className="relative z-50 flex aspect-square w-full max-w-7xl items-center h-screen"
         {...handlers}
       >
         {/* Main image */}
         <div className="w-full overflow-hidden">
-          <div className="relative flex aspect-[3/2] items-center justify-center overflow-hidden">
+          <div className="relative flex aspect-square items-center justify-center overflow-hidden">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={index}
@@ -70,10 +71,11 @@ export default function SharedModal({
                 className="absolute"
               >
                 <Image
-                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_600/${currentImage?.public_id}.${currentImage?.format}`}
-                  width={600}
-                  height={200}
+                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${currentImage?.public_id}.${currentImage?.format}`}
+                  width={currentImage!.width}
+                  height={currentImage!.height}
                   alt="bala - shans"
+                  priority
                   onLoad={() => setLoaded(true)}
                 />
               </motion.div>
