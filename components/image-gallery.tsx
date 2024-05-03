@@ -29,7 +29,7 @@ export function ImageGallery({ images }: Props) {
     <div className="grid grid-cols-3 gap-4 grid-flow-dense md:grid-cols-auto-fit md:auto-rows-[250px]">
       {images.map(({ id, fileName, blurDataUrl, height, width }) => {
         const imageOrientation = getImageOrientation({ height, width });
-        const href = `/gallery/${path.split("/").at(-1)}/images`;
+        const href = `/gallery/${path.split("/").at(-1)}/images?photoId=${id}`;
         const imageSrc = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${fileName}`;
 
         return (

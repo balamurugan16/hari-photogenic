@@ -19,7 +19,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col gap-8 mx-auto p-4 max-w-[90vw]">
-      <section className="text-center flex flex-col items-center gap-1">
+      <section className="text-center flex flex-col items-center gap-8">
         <div className="w-full flex flex-col gap-2 items-center">
           <h1 className="uppercase leading-10 tracking-big text-3xl">
             {couple.name}
