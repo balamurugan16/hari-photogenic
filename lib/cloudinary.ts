@@ -26,7 +26,7 @@ export async function getImages() {
   const results = await getImagesFromCloudinary()
   const images = results.resources.map<ImageProps>((resource, i) => {
     return {
-      id: i,
+      id: i + 1,
       height: +resource.height,
       width: +resource.width,
       fileName: `${resource.public_id}.${resource.format}`

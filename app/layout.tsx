@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { Montserrat as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Hari Photogenic",
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body
         className={cn("bg-background font-sans antialiased", fontSans.variable)}
       >
+        <Header />
         {children}
       </body>
     </html>

@@ -81,10 +81,11 @@
 
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -93,16 +94,27 @@ import {
 import { ImageProps } from "@/lib/types";
 import { isLandscape } from "@/lib/utils";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 type Props = {
   images: ImageProps[];
 };
 
 export function ImageCarousel({ images }: Props) {
-  const { couple, photoId } = useParams<{ couple: string; photoId: string }>();
+  const { couple } = useParams<{ couple: string }>();
+  const searchParams = useSearchParams();
+  const photoId = searchParams.get("photoId") ?? "1";
+  const [api, setApi] = useState<CarouselApi>();
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+    api.scrollTo(+photoId, true);
+  }, [api]);
 
   return (
-    <Carousel className="h-[90dvh] w-[70dvw]">
+    <Carousel setApi={setApi} className="h-[90dvh] w-[70dvw]">
       <CarouselContent>
         {images.map((image, index) => (
           <CarouselItem
@@ -117,9 +129,8 @@ export function ImageCarousel({ images }: Props) {
               className={`object-cover ${
                 isLandscape(image) ? "w-full h-60 md:h-full" : "h-[90dvh] w-96"
               }`}
-              alt={`${couple}-${photoId}`}
-              priority={index === 0}
-              // onLoad={() => setLoaded(true)}
+              alt={`${couple}-${image.id}`}
+              priority={index === +photoId}
             />
           </CarouselItem>
         ))}
