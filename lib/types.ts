@@ -6,12 +6,6 @@ export type ImageProps = {
   blurDataUrl?: string;
 }
 
-export type SharedModalProps = {
-  index: number;
-  images: ImageProps[];
-  currentPhoto?: ImageProps;
-  changePhotoId: (newVal: number) => void;
-  closeModal: () => void;
-  navigation: boolean;
-  direction?: number;
-}
+export type CloudinaryResource = {
+  resources: Record<string, string>[]
+};

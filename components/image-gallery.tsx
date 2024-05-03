@@ -1,12 +1,12 @@
 "use client";
 
 import { ImageProps } from "@/lib/types";
-import { Masonry } from "@/components/masonry";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLastViewedPhoto } from "@/lib/hooks/use-last-viewed-photo";
 import { useEffect, useRef } from "react";
+import { getImageOrientation } from "@/lib/utils";
 
 type Props = {
   images: ImageProps[];
@@ -26,35 +26,35 @@ export function ImageGallery({ images }: Props) {
   }, [lastViewedPhoto, setLastViewedPhoto]);
 
   return (
-    <Masonry
-      items={images}
-      config={{
-        columns: [1, 2, 3, 4],
-        gap: 8,
-        media: [400, 640, 1024, 1280],
-      }}
-      render={({ id, public_id, format, blurDataUrl, height, width }) => {
+    <div className="grid grid-cols-3 gap-4 grid-flow-dense md:grid-cols-auto-fit md:auto-rows-[250px]">
+      {images.map(({ id, fileName, blurDataUrl, height, width }) => {
+        const imageOrientation = getImageOrientation({ height, width });
+        const href = `/gallery/${path.split("/").at(-1)}/images`;
+        const imageSrc = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${fileName}`;
+
         return (
           <Link
-            href={`/gallery/${path.split("/").at(-1)}/${id}`}
+            href={href}
             key={id}
             ref={id === Number(lastViewedPhoto) ? lastViewedPhotoRef : null}
             shallow
-            className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
+            className={` after:contents group relative mb-5 w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight ${
+              imageOrientation === "landscape" ? "col-span-2" : "row-span-2"
+            }`}
           >
             <Image
-              alt="Next.js Conf photo"
-              className="group-hover:brightness-110 brightness-90 rounded-lg transform transition will-change-auto"
+              alt={`${fileName}`}
+              className="max-w-full h-full aspect-auto align-middle inline-block object-cover group-hover:brightness-110 brightness-90 rounded-lg transform transition will-change-auto"
               style={{ transform: "translate3d(0, 0, 0)" }}
               placeholder="blur"
               blurDataURL={blurDataUrl}
-              src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/w_300/${public_id}.${format}`}
-              width={width}
-              height={height}
+              src={imageSrc}
+              width={imageOrientation === "portrait" ? 4000 : 2500}
+              height={imageOrientation === "portrait" ? 2500 : 4000}
             />
           </Link>
         );
-      }}
-    />
+      })}
+    </div>
   );
 }
