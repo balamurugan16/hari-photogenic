@@ -1,5 +1,5 @@
 import { ImageCarousel as Carousel } from "@/components/carousel";
-import { getImages } from "@/lib/actions/images";
+import { getImages } from "@/lib/cloudinary";
 
 export default async function photo() {
   const images = await getImages();

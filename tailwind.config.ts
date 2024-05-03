@@ -22,6 +22,9 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans]
       },
+      letterSpacing: {
+        big: "0.1em"
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
