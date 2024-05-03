@@ -27,10 +27,10 @@ export function ImageGallery({ images }: Props) {
 
   return (
     <div className="grid  grid-cols-1 gap-4 grid-flow-dense md:grid-cols-auto-fit md:auto-rows-[250px]">
-      {images.map(({ id, public_id, format, blurDataUrl, height, width }) => {
+      {images.map(({ id, fileName, blurDataUrl, height, width }) => {
         const imageOrientation = getImageOrientation({ height, width });
-        const href = `/gallery/${path.split("/").at(-1)}/${id}`;
-        const imageSrc = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${public_id}.${format}`;
+        const href = `/gallery/${path.split("/").at(-1)}/images`;
+        const imageSrc = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${fileName}`;
 
         return (
           <Link
@@ -43,8 +43,7 @@ export function ImageGallery({ images }: Props) {
             }`}
           >
             <Image
-              // TODO: alt text needs to be provided: <couple_name>-photo_id
-              alt={`${public_id}`}
+              alt={`${fileName}`}
               className="max-w-full h-full aspect-auto align-middle inline-block object-cover group-hover:brightness-110 brightness-90 rounded-lg transform transition will-change-auto"
               style={{ transform: "translate3d(0, 0, 0)" }}
               placeholder="blur"

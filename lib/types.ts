@@ -2,8 +2,7 @@ export type ImageProps = {
   id: number;
   height: number;
   width: number;
-  public_id: string;
-  format: string;
+  fileName: string;
   blurDataUrl?: string;
 }
 
