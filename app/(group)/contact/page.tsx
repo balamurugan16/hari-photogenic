@@ -17,8 +17,8 @@ export default function ContactPage() {
         <Image src="/heart.svg" alt="heart" width="50" height="50" />
         <p className="italic text-sm font-serif leading-8 w-2/3">
           I appreciate you taking the time to look through my photographs. If
-          you loved what you saw, and felt a connection, get in touch! I’d love
-          to talk with you about creating photos together.
+          you loved what you saw, and felt a connection, get in touch! I would
+          love to talk with you about creating photos together.
         </p>
         <div className="flex flex-col font-semibold tracking-[0.3em] gap-2">
           <p>+91 9940968020</p>
