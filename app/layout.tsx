@@ -26,9 +26,7 @@ export default function RootLayout({
       <body
         className={cn("bg-background font-sans antialiased", fontSans.variable)}
       >
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );

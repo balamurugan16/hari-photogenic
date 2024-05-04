@@ -1,18 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
+import { NavBar } from "./nav-bar";
 
 export function Header() {
   return (
-    <header className="w-full fixed inset-0 p-4">
+    <header className="w-full h-20 fixed inset-0 px-2 md:px-24 flex items-center justify-between">
       <Link href="/">
-        <Image
-          priority
-          width={160}
-          height={90}
-          src="/logo.svg"
-          alt="hari photogenic"
-        />
+        <div className="w-[25vw] h-full">
+          <Image
+            priority
+            width="160"
+            height="90"
+            src="/logo.svg"
+            alt="hari photogenic"
+          />
+        </div>
       </Link>
+      <NavBar />
     </header>
   );
 }
