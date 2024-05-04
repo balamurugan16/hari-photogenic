@@ -29,7 +29,7 @@ export default function ContactPage() {
         <p className="italic text-sm font-serif leading-8 w-2/3">
           If you have not heard back from me within 48 hours via the contact
           form below, please check your spam folder, or email me directly. On
-          weekends this may be a bit longer as I'm usually away from the office
+          weekends this may be a bit longer as I am usually away from the office
           photographing weddings for lovely people like you.
         </p>
         <p className="italic text-sm font-serif">Thank you!</p>
