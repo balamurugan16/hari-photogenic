@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="fixed bottom-0 inset-x-0 flex flex-col md:flex-row-reverse sm:justify-center md:justify-between items-center gap-4 p-4 bg-gradient-to-b from-zinc-100 to-zinc-300 px-12 md:px-24">
+    <footer className="flex flex-col md:flex-row-reverse sm:justify-center md:justify-between items-center gap-4 p-4 bg-gradient-to-b from-zinc-100 to-zinc-300 px-12 md:px-24">
       <section className="text-center flex flex-col gap-2">
         <div className="tracking-big text-[0.5rem] flex gap-2">
           <p>+91 9940968020</p>

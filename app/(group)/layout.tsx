@@ -1,10 +1,12 @@
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { PropsWithChildren } from "react";
 
-export default function Layout() {
+export default function Layout({ children }: PropsWithChildren) {
   return (
-    <main className="mx-auto p-4 max-w-[1960px]">
+    <main>
       <Header />
+      <div className="mt-20">{children}</div>
       <Footer />
     </main>
   );
