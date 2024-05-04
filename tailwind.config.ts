@@ -20,10 +20,12 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans]
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+        serif: ["var(--font-serif)", ...fontFamily.serif]
       },
       letterSpacing: {
-        big: "0.1em"
+        big: "0.1em",
+        huge: "1em"
       },
       colors: {
         border: "hsl(var(--border))",
