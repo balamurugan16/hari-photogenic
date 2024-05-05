@@ -5,6 +5,7 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,34 +26,43 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { submitContactForm } from "@/lib/actions/contact-form";
+import {
+  type ContactForm as ContactFormType,
+  contactFormSchema,
+} from "@/lib/schemas";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon, SendIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-const contactFormSchema = z.object({
-  name: z.string().min(2).max(50),
-  eventDate: z.date(),
-  email: z.string().email(),
-  typeOfSession: z.enum(["Wedding", "Portraits"]),
-  location: z.string(),
-  phoneNumber: z.string(),
-  note: z.string().optional(),
-});
-
-type ContactForm = z.infer<typeof contactFormSchema>;
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useToast } from "./ui/use-toast";
+import { ToastAction } from "./ui/toast";
 
 export function ContactForm() {
-  const methods = useForm<ContactForm>({
+  const methods = useForm<ContactFormType>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {},
   });
 
-  function onSubmit(values: ContactForm) {
-    console.log(values);
-  }
+  const { toast } = useToast();
+
+  const onSubmit: SubmitHandler<ContactFormType> = async (data) => {
+    const response = await submitContactForm(data);
+    console.log(response);
+    if (response.error === null) {
+      toast({
+        title: "Yay! We received your Message",
+        description: "We will reach out to you very soon!",
+      });
+      return;
+    }
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Your submission failed, can you try again",
+      description: "There was a problem with your request.",
+    });
+  };
 
   return (
     <section className="m-4 p-10 min-w-[60%]">
@@ -66,10 +76,24 @@ export function ContactForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name of the Person / Couple</FormLabel>
+                <FormLabel>Name of the Person / Couple *</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={methods.control}
+            name="phoneNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone number *</FormLabel>
+                <FormControl>
+                  <Input type="text" {...field} />
+                </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -87,49 +111,48 @@ export function ContactForm() {
           />
           <FormField
             control={methods.control}
-            name="phoneNumber"
+            name="location"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone number</FormLabel>
+                <FormLabel>Event / Photoshoot Location *</FormLabel>
                 <FormControl>
                   <Input type="text" {...field} />
                 </FormControl>
+                <FormDescription>
+                  Please mention the location of the event / photoshoot
+                </FormDescription>
+                <FormMessage />
               </FormItem>
             )}
           />
           <FormField
             control={methods.control}
-            name="phoneNumber"
+            name="eventType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Event / Photoshoot Location</FormLabel>
-                <FormControl>
-                  <Input type="text" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={methods.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>What type of session are you looking for?</FormLabel>
-                <FormControl>
-                  <Select {...field}>
+                <FormLabel>
+                  What type of session are you looking for? *
+                </FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select an option" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="Wedding">Wedding</SelectItem>
-                        <SelectItem value="Portrait">
-                          Portrait (Couple, family, engagements, etc)
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Wedding">Wedding</SelectItem>
+                      <SelectItem value="Portraits">
+                        Portrait (Couple, family, engagements, etc)
+                      </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -138,7 +161,7 @@ export function ContactForm() {
             name="eventDate"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Event date</FormLabel>
+                <FormLabel>Event date*</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
