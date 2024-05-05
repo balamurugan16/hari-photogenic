@@ -52,7 +52,6 @@ export function ContactForm() {
     console.log(response);
     if (response.error === null) {
       toast({
-        variant: "success",
         title: "Yay! We received your Message",
         description: "We will reach out to you very soon!",
       });
