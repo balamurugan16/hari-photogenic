@@ -6,6 +6,7 @@ import {
   Old_Standard_TT as FontSerif,
 } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Hari Photogenic",
@@ -38,6 +39,7 @@ export default function RootLayout({
         )}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );
