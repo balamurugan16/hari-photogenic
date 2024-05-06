@@ -8,6 +8,7 @@ export const env = createEnv({
     CLOUDINARY_FOLDER: z.string(),
     SUPABASE_URL: z.string().url(),
     SUPABASE_ANON_KEY: z.string(),
+    RESEND_API_KEY: z.string(),
   },
   client: {
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
@@ -18,6 +19,7 @@ export const env = createEnv({
     CLOUDINARY_FOLDER: process.env.CLOUDINARY_FOLDER,
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     SUPABASE_URL: process.env.SUPABASE_URL,
-    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+    RESEND_API_KEY: process.env.RESEND_API_KEY
   },
 });

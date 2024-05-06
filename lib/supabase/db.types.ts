@@ -12,9 +12,11 @@ export type Database = {
       contact_form: {
         Row: {
           email: string | null
+          email_id: string | null
           event_date: string
           event_type: Database["public"]["Enums"]["event_type"]
           id: number
+          is_emailed: boolean
           location: string
           name: string
           note: string | null
@@ -22,9 +24,11 @@ export type Database = {
         }
         Insert: {
           email?: string | null
+          email_id?: string | null
           event_date: string
           event_type: Database["public"]["Enums"]["event_type"]
           id?: never
+          is_emailed?: boolean
           location: string
           name: string
           note?: string | null
@@ -32,9 +36,11 @@ export type Database = {
         }
         Update: {
           email?: string | null
+          email_id?: string | null
           event_date?: string
           event_type?: Database["public"]["Enums"]["event_type"]
           id?: never
+          is_emailed?: boolean
           location?: string
           name?: string
           note?: string | null
