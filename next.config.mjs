@@ -10,7 +10,9 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [{
-      hostname: "res.cloudinary.com"
+      hostname: "res.cloudinary.com",
+    }, {
+      hostname: "picsum.photos",
     }]
   }
 };
