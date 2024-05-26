@@ -26,7 +26,16 @@ export function InstagramSection() {
     <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-8">
         <div className="flex flex-col items-center gap-6">
-          <Instagram className="w-6 h-6" />
+          <span className="flex justify-center items-center gap-2">
+            <Instagram className="w-6 h-6" />
+            <Link
+              className="text-lg"
+              target="_blank"
+              href="https://www.instagram.com/hari_photogenic/"
+            >
+              @hari_photogenic
+            </Link>
+          </span>
           <h2 className="font-light tracking-big text-lg md:text-2xl  uppercase">
             Follow me on Instagram
           </h2>
