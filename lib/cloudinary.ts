@@ -11,7 +11,7 @@ cloudinary.v2.config({
 
 let cachedResults: CloudinaryResource;
 
-export default async function getImagesFromCloudinary(folder: string) {
+async function getImagesFromCloudinary(folder: string) {
   if (!cachedResults) {
     const fetchedResults = await cloudinary.v2.search
       .expression(`folder:albums/${folder}/*`)
@@ -49,25 +49,25 @@ export async function getBase64ImageUrl(image: ImageProps): Promise<string> {
   return url;
 }
 
-export async function getImage(id: string) {
-  const results = await getImagesFromCloudinary();
+// export async function getImage(id: string) {
+//   const results = await getImagesFromCloudinary();
 
-  let reducedResults: ImageProps[] = [];
-  let i = 0;
-  for (let result of results.resources) {
-    reducedResults.push({
-      id: i,
-      height: +result.height,
-      width: +result.width,
-      fileName: `${result.public_id}.${result.format}`
-    });
-    i++;
-  }
+//   let reducedResults: ImageProps[] = [];
+//   let i = 0;
+//   for (let result of results.resources) {
+//     reducedResults.push({
+//       id: i,
+//       height: +result.height,
+//       width: +result.width,
+//       fileName: `${result.public_id}.${result.format}`
+//     });
+//     i++;
+//   }
 
-  const currentPhoto = reducedResults.find(
-    (img) => img.id === Number(id),
-  ) as ImageProps;
+//   const currentPhoto = reducedResults.find(
+//     (img) => img.id === Number(id),
+//   ) as ImageProps;
 
-  currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
-  return currentPhoto;
-}
+//   currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
+//   return currentPhoto;
+// }
