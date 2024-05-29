@@ -9,6 +9,11 @@ export async function getAllAlbums() {
   return response.data ?? [];
 }
 
+export async function getHighlightAlbums() {
+  const response = await supabase.from("album").select().limit(3)
+  return response.data ?? [];
+}
+
 export async function getAlbum(folder: string) {
   const response = await supabase
     .from("album")

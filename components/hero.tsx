@@ -41,7 +41,7 @@ export function Hero() {
               <CarouselItem key={id}>
                 <Image
                   alt={image.alt}
-                  className="w-full rounded-lg h-[500px] sm:h-[600px] lg:h-[700px] object-cover object-center"
+                  className="w-full h-[500px] sm:h-[600px] lg:h-[700px] object-cover object-center"
                   height={800}
                   src={image.src}
                   style={{

@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap");
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -33,6 +35,8 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    --font-sans: "Montserrat";
+    --font-serif: "Old Standard TT";
   }
 
   .dark {
