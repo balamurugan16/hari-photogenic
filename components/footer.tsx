@@ -12,7 +12,7 @@ export function Footer() {
           <p>hariphotogenic@gmail.com</p>
         </div>
         <div className="flex items-center justify-evenly">
-          <Link href="https://instagram.com">
+          <Link href="https://www.instagram.com/hari_photogenic">
             <Image
               alt="instagram logo"
               src="/icons/instagram.svg"
