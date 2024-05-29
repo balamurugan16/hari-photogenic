@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
+import { InfoPrices } from "@/components/contact-card";
 import { InstagramSection } from "@/components/instagram-section";
 import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <main className="w-full container">
-      <section className="flex flex-col items-center justify-center gap-10">
+    <main className="w-full container flex flex-col">
+      <section className="flex flex-col items-center justify-center gap-10 text-center">
         <h1 className="uppercase text-4xl font-bold tracking-big">
           Hello! I'm Hari Prasath
         </h1>
@@ -54,6 +55,7 @@ export default function AboutPage() {
         </div>
         <Image alt="line" src="/line.png" height="180" width="150" />
       </section>
+      <InfoPrices />
       <InstagramSection />
     </main>
   );

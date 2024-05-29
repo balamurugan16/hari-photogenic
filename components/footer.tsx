@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="flex flex-col md:flex-row-reverse sm:justify-center md:justify-between items-center gap-4 p-4 bg-gradient-to-b from-zinc-100 to-zinc-300 px-12 md:px-24">
       <section className="text-center flex flex-col gap-2">
-        <div className="tracking-big text-xs flex gap-2">
+        <div className="tracking-big text-[0.5rem] flex gap-2">
           <p>+91 9940968020</p>
           <span>|</span>
           <p>hariphotogenic@gmail.com</p>
@@ -45,7 +45,7 @@ export function Footer() {
           width={200}
           height={160}
         />
-        <p className="text-xs uppercase">
+        <p className="text-[0.5rem] uppercase">
           &copy; {getCurrentYear()} HARI PHOTOGENIC. ALL RIGHTS RESERVED
         </p>
       </section>

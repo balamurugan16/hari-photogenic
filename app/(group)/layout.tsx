@@ -6,7 +6,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <main>
       <Header />
-      <div className="mt-20">{children}</div>
+      {children}
       <Footer />
     </main>
   );
