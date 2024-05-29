@@ -11,10 +11,10 @@ cloudinary.v2.config({
 
 let cachedResults: CloudinaryResource;
 
-export default async function getImagesFromCloudinary() {
+export default async function getImagesFromCloudinary(folder: string) {
   if (!cachedResults) {
     const fetchedResults = await cloudinary.v2.search
-      .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
+      .expression(`folder:albums/${folder}/*`)
       .sort_by("public_id", "desc")
       .max_results(400)
       .execute() as CloudinaryResource;
@@ -23,8 +23,8 @@ export default async function getImagesFromCloudinary() {
   return cachedResults;
 }
 
-export async function getImages() {
-  const results = await getImagesFromCloudinary()
+export async function getImages(folder: string) {
+  const results = await getImagesFromCloudinary(folder)
   const images = results.resources.map<ImageProps>((resource, i) => {
     return {
       id: i + 1,
