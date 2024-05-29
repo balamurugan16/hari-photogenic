@@ -11,8 +11,8 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main className="mx-auto p-4 max-w-[1960px]">
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-6 py-12">
+      <main className="mx-auto max-w-[1960px]">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-6 py-4">
           {albums.map((album) => (
             <div
               key={album.id}
