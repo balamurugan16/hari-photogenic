@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import {
-  Montserrat as FontSans,
-  Old_Standard_TT as FontSerif,
-} from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -13,17 +9,6 @@ export const metadata: Metadata = {
   description: "Wedding Photography by Hari Photogenic",
 };
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const fontItalic = FontSerif({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-serif",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,13 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          "bg-background font-sans antialiased",
-          fontSans.variable,
-          fontItalic.variable
-        )}
-      >
+      <body className={cn("bg-background font-sans antialiased")}>
         {children}
         <Toaster />
       </body>
